@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kali Linux, Virtualización y Protocolos de Red</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        #quiz {
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kali Linux, Virtualización y Protocolos de Red</h1>
+        
+        <h2>Kali Linux</h2>
+        <p>Kali Linux es una distribución de Linux basada en Debian diseñada para pruebas de penetración y auditorías de seguridad. Viene pre-instalada con numerosas herramientas de seguridad y hacking.</p>
+        
+        <h2>Virtualización con VirtualBox</h2>
+        <p>VirtualBox es un software de virtualización que permite ejecutar múltiples sistemas operativos en una sola máquina física. Es útil para:</p>
+        <ul>
+            <li>Probar diferentes sistemas operativos sin necesidad de instalarlos directamente en el hardware.</li>
+            <li>Crear entornos aislados para pruebas de software o seguridad.</li>
+            <li>Ejecutar aplicaciones que requieren un sistema operativo específico.</li>
+        </ul>
+        <p>Para virtualizar Kali Linux con VirtualBox:</p>
+        <ol>
+            <li>Descarga e instala VirtualBox desde el sitio oficial.</li>
+            <li>Descarga la imagen ISO de Kali Linux.</li>
+            <li>En VirtualBox, crea una nueva máquina virtual y asigna recursos (RAM, CPU, espacio en disco).</li>
+            <li>Configura la máquina virtual para arrancar desde la ISO de Kali Linux.</li>
+            <li>Inicia la máquina virtual e instala Kali Linux.</li>
+        </ol>
+        
+        <h2>10 Comandos Comunes en Kali Linux</h2>
+        <ol>
+            <li><code>nmap</code>: Escáner de puertos y auditoría de seguridad de red.</li>
+            <li><code>metasploit</code>: Framework para desarrollo y ejecución de exploits.</li>
+            <li><code>aircrack-ng</code>: Suite para auditar redes inalámbricas.</li>
+            <li><code>hydra</code>: Herramienta para crackeo de contraseñas en red.</li>
+            <li><code>john</code>: John the Ripper, crackeador de contraseñas offline.</li>
+            <li><code>wireshark</code>: Analizador de protocolos de red.</li>
+            <li><code>sqlmap</code>: Herramienta para detectar y explotar vulnerabilidades SQL injection.</li>
+            <li><code>nikto</code>: Escáner de vulnerabilidades web.</li>
+            <li><code>hashcat</code>: Herramienta avanzada para recuperación de contraseñas.</li>
+            <li><code>burpsuite</code>: Plataforma integrada para realizar pruebas de seguridad en aplicaciones web.</li>
+        </ol>
+        
+        <h2>FTP (File Transfer Protocol)</h2>
+        <p>FTP es un protocolo de red para la transferencia de archivos entre sistemas conectados a una red TCP, basado en una arquitectura cliente-servidor.</p>
+        
+        <h2>8 Protocolos de Red Comunes</h2>
+        <ol>
+            <li><strong>HTTP/HTTPS</strong>: Protocolo de transferencia de hipertexto, base de la comunicación en la World Wide Web.</li>
+            <li><strong>TCP/IP</strong>: Conjunto de protocolos fundamentales para la comunicación en Internet.</li>
+            <li><strong>UDP</strong>: Protocolo de datagramas de usuario, usado para transmisiones rápidas sin conexión.</li>
+            <li><strong>DNS</strong>: Sistema de nombres de dominio, traduce nombres de dominio a direcciones IP.</li>
+            <li><strong>SMTP</strong>: Protocolo simple de transferencia de correo, usado para el envío de emails.</li>
+            <li><strong>SSH</strong>: Secure Shell, protocolo para acceso remoto seguro a sistemas.</li>
+            <li><strong>DHCP</strong>: Protocolo de configuración dinámica de host, asigna automáticamente direcciones IP.</li>
+            <li><strong>SNMP</strong>: Protocolo simple de administración de red, usado para monitorear y gestionar dispositivos en red.</li>
+        </ol>
+        
+        <h2>Examen sobre Kali Linux, Virtualización y Protocolos de Red</h2>
+        <div id="quiz">
+            <div class="question">
+                <p>1. ¿Cuál es el propósito principal de Kali Linux?</p>
+                <input type="radio" name="q1" value="a"> a) Desarrollo web<br>
+                <input type="radio" name="q1" value="b"> b) Pruebas de penetración y auditorías de seguridad<br>
+                <input type="radio" name="q1" value="c"> c) Edición de video<br>
+            </div>
+            <div class="question">
+                <p>2. ¿Para qué se utiliza principalmente VirtualBox?</p>
+                <input type="radio" name="q2" value="a"> a) Edición de imágenes<br>
+                <input type="radio" name="q2" value="b"> b) Virtualización de sistemas operativos<br>
+                <input type="radio" name="q2" value="c"> c) Desarrollo de aplicaciones móviles<br>
+            </div>
+            <div class="question">
+                <p>3. ¿Qué herramienta de Kali Linux se usa para escanear puertos?</p>
+                <input type="radio" name="q3" value="a"> a) wireshark<br>
+                <input type="radio" name="q3" value="b"> b) nmap<br>
+                <input type="radio" name="q3" value="c"> c) hydra<br>
+            </div>
+            <div class="question">
+                <p>4. ¿Qué significa FTP?</p>
+                <input type="radio" name="q4" value="a"> a) File Transfer Protocol<br>
+                <input type="radio" name="q4" value="b"> b) Fast Transfer Process<br>
+                <input type="radio" name="q4" value="c"> c) Firewall Test Procedure<br>
+            </div>
+            <div class="question">
+                <p>5. ¿Cuál de los siguientes NO es un protocolo de red común?</p>
+                <input type="radio" name="q5" value="a"> a) HTTP<br>
+                <input type="radio" name="q5" value="b"> b) TCP/IP<br>
+                <input type="radio" name="q5" value="c"> c) JPEG<br>
+            </div>
+            <button onclick="checkQuiz()">Enviar respuestas</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkQuiz() {
+            const answers = {q1: 'b', q2: 'b', q3: 'b', q4: 'a', q5: 'c'};
+            let score = 0;
+            let total = Object.keys(answers).length;
+
+            for (let q in answers) {
+                let selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<h3>Resultado</h3><p>Has acertado ${score} de ${total} preguntas.</p>`;
+            
+            if (score === total) {
+                resultDiv.innerHTML += '<p>¡Excelente! Demuestras un sólido entendimiento de Kali Linux, virtualización y protocolos de red.</p>';
+            } else if (score > total / 2) {
+                resultDiv.innerHTML += '<p>Buen trabajo, pero hay espacio para mejorar. Revisa las áreas en las que fallaste y vuelve a estudiar el material.</p>';
+            } else {
+                resultDiv.innerHTML += '<p>Necesitas estudiar más sobre estos temas. Repasa el tutorial y considera buscar recursos adicionales para fortalecer tu comprensión.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

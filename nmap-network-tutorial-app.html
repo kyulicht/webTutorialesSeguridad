@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Nmap y Escaneo de Redes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        #quiz {
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tutorial: Nmap y Escaneo de Redes</h1>
+        
+        <h2>¿Qué es Nmap?</h2>
+        <p>Nmap (Network Mapper) es una herramienta de código abierto utilizada para descubrir redes y auditar la seguridad. Permite a los administradores de sistemas y profesionales de seguridad escanear redes y sistemas para determinar qué puertos están abiertos, qué servicios se están ejecutando y otras características.</p>
+        
+        <h2>Tipos de Redes</h2>
+        <ul>
+            <li><strong>LAN (Local Area Network):</strong> Red local que cubre un área pequeña como una oficina o un hogar.</li>
+            <li><strong>WAN (Wide Area Network):</strong> Red que cubre un área geográfica amplia, como una ciudad o país.</li>
+            <li><strong>VPN (Virtual Private Network):</strong> Red privada que utiliza una red pública (como Internet) para conectar usuarios remotos.</li>
+            <li><strong>VLAN (Virtual Local Area Network):</strong> Red lógica independiente dentro de una red física.</li>
+        </ul>
+        
+        <h2>Comandos Básicos de Nmap</h2>
+        <table>
+            <tr>
+                <th>Comando</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td><code>nmap [IP]</code></td>
+                <td>Escaneo básico de los 1000 puertos más comunes</td>
+            </tr>
+            <tr>
+                <td><code>nmap -p- [IP]</code></td>
+                <td>Escanea todos los puertos (1-65535)</td>
+            </tr>
+            <tr>
+                <td><code>nmap -sV [IP]</code></td>
+                <td>Detecta versiones de servicios</td>
+            </tr>
+            <tr>
+                <td><code>nmap -O [IP]</code></td>
+                <td>Intenta detectar el sistema operativo</td>
+            </tr>
+            <tr>
+                <td><code>nmap -sU [IP]</code></td>
+                <td>Escaneo UDP</td>
+            </tr>
+        </table>
+        
+        <h2>Qué hacer si no se pueden escanear los puertos</h2>
+        <ol>
+            <li><strong>Verificar conectividad:</strong> Asegúrate de que tienes conectividad con el objetivo usando ping o traceroute.</li>
+            <li><strong>Comprobar firewalls:</strong> Los firewalls pueden bloquear los escaneos. Intenta usar técnicas de evasión de Nmap.</li>
+            <li><strong>Usar escaneo sigiloso:</strong> Utiliza la opción -sS para un escaneo SYN sigiloso.</li>
+            <li><strong>Ajustar la velocidad:</strong> Un escaneo más lento puede evitar la detección. Usa -T2 para un escaneo más lento.</li>
+            <li><strong>Fragmentación de paquetes:</strong> Usa -f para fragmentar los paquetes y evadir algunos firewalls.</li>
+        </ol>
+        
+        <h2>Parámetros Avanzados de Nmap</h2>
+        <ul>
+            <li><code>-sN</code>: Escaneo NULL</li>
+            <li><code>-sF</code>: Escaneo FIN</li>
+            <li><code>-sX</code>: Escaneo XMAS</li>
+            <li><code>-Pn</code>: Trata todos los hosts como en línea (omite el descubrimiento)</li>
+            <li><code>-A</code>: Habilita la detección de SO, versión, script y traceroute</li>
+        </ul>
+        
+        <h2>Cuestionario sobre Nmap y Redes</h2>
+        <div id="quiz">
+            <div class="question">
+                <p>1. ¿Qué comando de Nmap escanea todos los puertos?</p>
+                <input type="radio" name="q1" value="a"> a) nmap [IP]<br>
+                <input type="radio" name="q1" value="b"> b) nmap -p- [IP]<br>
+                <input type="radio" name="q1" value="c"> c) nmap -sV [IP]<br>
+            </div>
+            <div class="question">
+                <p>2. ¿Qué tipo de red cubre típicamente un área geográfica amplia?</p>
+                <input type="radio" name="q2" value="a"> a) LAN<br>
+                <input type="radio" name="q2" value="b"> b) WAN<br>
+                <input type="radio" name="q2" value="c"> c) VLAN<br>
+            </div>
+            <div class="question">
+                <p>3. ¿Qué opción de Nmap se usa para la detección de versiones de servicios?</p>
+                <input type="radio" name="q3" value="a"> a) -O<br>
+                <input type="radio" name="q3" value="b"> b) -sU<br>
+                <input type="radio" name="q3" value="c"> c) -sV<br>
+            </div>
+            <div class="question">
+                <p>4. Si un escaneo de puertos está siendo bloqueado, ¿qué técnica podrías intentar?</p>
+                <input type="radio" name="q4" value="a"> a) Aumentar la velocidad del escaneo<br>
+                <input type="radio" name="q4" value="b"> b) Usar fragmentación de paquetes (-f)<br>
+                <input type="radio" name="q4" value="c"> c) Escanear más puertos simultáneamente<br>
+            </div>
+            <button onclick="checkQuiz()">Enviar respuestas</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkQuiz() {
+            const answers = {q1: 'b', q2: 'b', q3: 'c', q4: 'b'};
+            let score = 0;
+            let total = Object.keys(answers).length;
+
+            for (let q in answers) {
+                let selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<h3>Resultado</h3><p>Has acertado ${score} de ${total} preguntas.</p>`;
+            
+            if (score === total) {
+                resultDiv.innerHTML += '<p>¡Excelente! Has demostrado un buen entendimiento de Nmap y escaneo de redes.</p>';
+            } else if (score > total / 2) {
+                resultDiv.innerHTML += '<p>Buen trabajo, pero aún hay espacio para mejorar. Revisa el tutorial nuevamente.</p>';
+            } else {
+                resultDiv.innerHTML += '<p>Necesitas estudiar más sobre Nmap y redes. Te recomiendo releer el tutorial y practicar con Nmap en un entorno seguro.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

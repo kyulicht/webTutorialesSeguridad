@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Hacking Ético: Proceso, Herramientas y Mentalidad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        #quiz {
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guía de Hacking Ético: Proceso, Herramientas y Mentalidad</h1>
+        
+        <h2>Mentalidad del Hacker Ético</h2>
+        <p>Un hacker ético debe mantener siempre una actitud profesional y ética:</p>
+        <ul>
+            <li>Obtener siempre autorización explícita antes de realizar cualquier prueba.</li>
+            <li>Respetar la privacidad y la confidencialidad de los datos.</li>
+            <li>Documentar meticulosamente todas las actividades y hallazgos.</li>
+            <li>Seguir el principio de "no hacer daño" - evitar acciones que puedan comprometer la integridad del sistema.</li>
+            <li>Mantener una comunicación clara y transparente con el cliente.</li>
+            <li>Estar siempre aprendiendo y actualizándose sobre nuevas vulnerabilidades y técnicas.</li>
+        </ul>
+
+        <h2>Proceso de Pruebas de Penetración</h2>
+        
+        <h3>1. Reconocimiento</h3>
+        <p>Recopilar información sobre el objetivo usando fuentes públicas y herramientas de OSINT.</p>
+        
+        <h3>2. Escaneo</h3>
+        <p>Identificar sistemas activos, puertos abiertos y servicios en ejecución.</p>
+        <strong>Nmap (Escaneo de puertos):</strong>
+        <pre><code>nmap -sV -sC -O -p- 192.168.1.1</code></pre>
+        <p>Este comando realiza un escaneo completo de puertos (-p-), detecta versiones de servicios (-sV), ejecuta scripts por defecto (-sC) e intenta identificar el sistema operativo (-O).</p>
+        
+        <h3>3. Enumeración</h3>
+        <p>Recopilar información más detallada sobre los servicios identificados.</p>
+        <strong>Gobuster (Enumeración de directorios web):</strong>
+        <pre><code>gobuster dir -u http://ejemplo.com -w /usr/share/wordlists/dirb/common.txt</code></pre>
+        <p>Este comando busca directorios y archivos en un sitio web usando una lista de palabras común.</p>
+        
+        <strong>Nikto (Escáner de vulnerabilidades web):</strong>
+        <pre><code>nikto -h http://ejemplo.com</code></pre>
+        <p>Nikto realiza un escaneo exhaustivo de vulnerabilidades web conocidas.</p>
+        
+        <h3>4. Análisis de Vulnerabilidades</h3>
+        <p>Identificar posibles vulnerabilidades en los sistemas y servicios descubiertos.</p>
+        <strong>OpenVAS:</strong>
+        <p>OpenVAS es una suite de herramientas para escaneo y gestión de vulnerabilidades. Se configura y se ejecuta típicamente a través de una interfaz web.</p>
+        
+        <h3>5. Explotación</h3>
+        <p>Intentar explotar las vulnerabilidades identificadas para demostrar el impacto potencial.</p>
+        <strong>Metasploit:</strong>
+        <pre><code>msfconsole
+use exploit/windows/smb/ms17_010_eternalblue
+set RHOSTS 192.168.1.1
+exploit</code></pre>
+        <p>Este ejemplo muestra cómo usar Metasploit para explotar la vulnerabilidad EternalBlue en un sistema Windows.</p>
+        
+        <h3>6. Post-explotación</h3>
+        <p>Evaluar el alcance del acceso obtenido y recopilar evidencias.</p>
+        
+        <h3>7. Informes</h3>
+        <p>Documentar todos los hallazgos, vulnerabilidades y recomendaciones en un informe detallado.</p>
+
+        <h2>Consideraciones Importantes</h2>
+        <ul>
+            <li>Siempre operar dentro del alcance acordado con el cliente.</li>
+            <li>Utilizar un entorno de pruebas aislado cuando sea posible para evitar impactos no deseados.</li>
+            <li>Mantener todas las herramientas y sistemas actualizados.</li>
+            <li>Cifrar y proteger adecuadamente todos los datos recopilados durante las pruebas.</li>
+            <li>Estar preparado para detener inmediatamente las pruebas si se detecta un riesgo no previsto.</li>
+        </ul>
+
+        <h2>Cuestionario sobre Hacking Ético</h2>
+        <div id="quiz">
+            <div class="question">
+                <p>1. ¿Cuál es el primer paso crucial antes de comenzar cualquier prueba de penetración?</p>
+                <input type="radio" name="q1" value="a"> a) Realizar un escaneo de puertos<br>
+                <input type="radio" name="q1" value="b"> b) Obtener autorización explícita del cliente<br>
+                <input type="radio" name="q1" value="c"> c) Ejecutar Metasploit<br>
+            </div>
+            <div class="question">
+                <p>2. ¿Qué herramienta se utiliza comúnmente para la enumeración de directorios web?</p>
+                <input type="radio" name="q2" value="a"> a) Nmap<br>
+                <input type="radio" name="q2" value="b"> b) Nikto<br>
+                <input type="radio" name="q2" value="c"> c) Gobuster<br>
+            </div>
+            <div class="question">
+                <p>3. ¿Cuál es el propósito principal de Nikto?</p>
+                <input type="radio" name="q3" value="a"> a) Escaneo de puertos<br>
+                <input type="radio" name="q3" value="b"> b) Explotación de vulnerabilidades<br>
+                <input type="radio" name="q3" value="c"> c) Escaneo de vulnerabilidades web<br>
+            </div>
+            <div class="question">
+                <p>4. En el contexto del hacking ético, ¿qué significa "no hacer daño"?</p>
+                <input type="radio" name="q4" value="a"> a) Nunca realizar pruebas en sistemas en producción<br>
+                <input type="radio" name="q4" value="b"> b) Evitar acciones que puedan comprometer la integridad del sistema<br>
+                <input type="radio" name="q4" value="c"> c) Solo utilizar herramientas de código abierto<br>
+            </div>
+            <div class="question">
+                <p>5. ¿Cuál es la fase final típica en un proceso de pruebas de penetración?</p>
+                <input type="radio" name="q5" value="a"> a) Explotación<br>
+                <input type="radio" name="q5" value="b"> b) Escaneo<br>
+                <input type="radio" name="q5" value="c"> c) Informes<br>
+            </div>
+            <button onclick="checkQuiz()">Enviar respuestas</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkQuiz() {
+            const answers = {q1: 'b', q2: 'c', q3: 'c', q4: 'b', q5: 'c'};
+            let score = 0;
+            let total = Object.keys(answers).length;
+
+            for (let q in answers) {
+                let selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<h3>Resultado</h3><p>Has acertado ${score} de ${total} preguntas.</p>`;
+            
+            if (score === total) {
+                resultDiv.innerHTML += '<p>¡Excelente! Demuestras un sólido entendimiento de los principios y prácticas del hacking ético.</p>';
+            } else if (score > total / 2) {
+                resultDiv.innerHTML += '<p>Buen trabajo, pero hay espacio para mejorar. Revisa las áreas en las que fallaste y vuelve a estudiar el material.</p>';
+            } else {
+                resultDiv.innerHTML += '<p>Necesitas estudiar más sobre hacking ético. Repasa el tutorial y considera buscar recursos adicionales para fortalecer tu comprensión.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
