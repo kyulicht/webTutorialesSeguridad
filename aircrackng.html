@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial de Hacking Ético: Aircrack-ng y Airodump-ng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #1e90ff;
+        }
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            background-color: #e6e6e6;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .exam {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .question input {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tutorial de Hacking Ético: Aircrack-ng y Airodump-ng</h1>
+
+    <h2>Introducción a Aircrack-ng</h2>
+    <p>Aircrack-ng es una suite de herramientas usadas para auditar la seguridad de redes Wi-Fi. La herramienta principal, <code>aircrack-ng</code>, se utiliza para descifrar contraseñas WEP y WPA/WPA2 capturando paquetes de datos.</p>
+
+    <h3>Comandos Básicos de Aircrack-ng</h3>
+    <p>La estructura básica del comando es:</p>
+    <pre><code>aircrack-ng -a [modo] -b [BSSID] -w [ruta/diccionario.txt] [captura.cap]</code></pre>
+
+    <p>Algunos parámetros importantes:</p>
+    <ul>
+        <li><code>-a</code>: Especifica el modo de ataque (1 para WEP, 2 para WPA/WPA2).</li>
+        <li><code>-b</code>: Especifica la dirección MAC del punto de acceso (BSSID).</li>
+        <li><code>-w</code>: Especifica la ruta del diccionario de contraseñas.</li>
+    </ul>
+
+    <p>Ejemplo básico:</p>
+    <pre><code>aircrack-ng -a 2 -b 00:11:22:33:44:55 -w /path/to/dictionary.txt captura.cap</code></pre>
+    <p>En este ejemplo, Aircrack-ng intenta descifrar la contraseña WPA/WPA2 usando un diccionario de contraseñas.</p>
+
+    <h2>Introducción a Airodump-ng</h2>
+    <p>Airodump-ng es una herramienta dentro de la suite Aircrack-ng que se utiliza para capturar tráfico de red inalámbrica. Es útil para recolectar datos que luego pueden ser usados en ataques de fuerza bruta con Aircrack-ng.</p>
+
+    <h3>Comandos Básicos de Airodump-ng</h3>
+    <p>La estructura básica del comando es:</p>
+    <pre><code>airodump-ng [opciones] [interface]</code></pre>
+
+    <p>Algunas opciones importantes:</p>
+    <ul>
+        <li><code>--bssid</code>: Fija la captura al BSSID específico del punto de acceso.</li>
+        <li><code>--channel</code>: Limita la captura a un canal específico.</li>
+        <li><code>-w</code>: Especifica el nombre de archivo para guardar la captura.</li>
+    </ul>
+
+    <p>Ejemplo básico:</p>
+    <pre><code>airodump-ng --bssid 00:11:22:33:44:55 --channel 6 -w captura wlan0</code></pre>
+    <p>En este ejemplo, Airodump-ng capturará el tráfico del BSSID específico en el canal 6 y lo guardará en un archivo llamado "captura".</p>
+
+    <h3>Situaciones de Uso</h3>
+    <p>Estas herramientas se usan principalmente en auditorías de seguridad para probar la robustez de contraseñas de redes inalámbricas. Airodump-ng se utiliza primero para capturar paquetes de datos, y luego Aircrack-ng se usa para intentar descifrar la contraseña de la red.</p>
+
+    <div class="exam">
+        <h2>Examen de Conocimientos en Hacking Ético</h2>
+        <form id="examForm">
+            <div class="question">
+                <p>1. ¿Cuál es la función principal de Aircrack-ng?</p>
+                <label><input type="radio" name="q1" value="a"> A. Interceptar paquetes de datos</label><br>
+                <label><input type="radio" name="q1" value="b"> B. Descifrar contraseñas de redes Wi-Fi</label><br>
+                <label><input type="radio" name="q1" value="c"> C. Auditar vulnerabilidades SQL</label><br>
+            </div>
+            <div class="question">
+                <p>2. ¿Para qué se usa Airodump-ng?</p>
+                <label><input type="radio" name="q2" value="a"> A. Para analizar el tráfico HTTPS</label><br>
+                <label><input type="radio" name="q2" value="b"> B. Para capturar tráfico de red inalámbrica</label><br>
+                <label><input type="radio" name="q2" value="c"> C. Para realizar ataques de fuerza bruta contra servicios FTP</label><br>
+            </div>
+            <div class="question">
+                <p>3. ¿Qué comando usarías para capturar paquetes en un canal específico?</p>
+                <label><input type="radio" name="q3" value="a"> A. airodump-ng --channel 6 -w captura wlan0</label><br>
+                <label><input type="radio" name="q3" value="b"> B. aircrack-ng -a 2 -b 00:11:22:33:44:55 -w /path/to/dictionary.txt captura.cap</label><br>
+                <label><input type="radio" name="q3" value="c"> C. nmap -p 80 192.168.1.1</label><br>
+            </div>
+            <button type="button" onclick="submitExam()">Enviar Examen</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function submitExam() {
+            const answers = {
+                q1: "b",
+                q2: "b",
+                q3: "a"
+            };
+            let score = 0;
+            const form = document.getElementById('examForm');
+            for (let i = 1; i <= 3; i++) {
+                const question = form.querySelector(`input[name="q${i}"]:checked`);
+                if (question && question.value === answers[`q${i}`]) {
+                    score++;
+                }
+            }
+            const resultText = `Tu puntuación es: ${score} de 3.`;
+            document.getElementById('result').textContent = resultText;
+        }
+    </script>
+
+</body>
+</html>

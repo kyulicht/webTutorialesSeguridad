@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial de Hacking Ético</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            background-color: #e6e6e6;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .exam {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .question input {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tutorial de Hacking Ético: Hydra y SQLMap</h1>
+    
+    <h2>Introducción a Hydra</h2>
+    <p>Hydra es una herramienta de fuerza bruta usada para probar la seguridad de sistemas mediante ataques de fuerza bruta a servicios de autenticación. Es capaz de atacar diferentes tipos de servicios como FTP, SSH, Telnet, HTTP, HTTPS, entre otros.</p>
+
+    <h3>Comandos Básicos de Hydra</h3>
+    <p>Para usar Hydra, la estructura básica del comando es la siguiente:</p>
+    <pre><code>hydra [opciones] [tipo_de_servicio]://[dirección_del_objetivo]</code></pre>
+
+    <p>Algunos comandos y opciones importantes:</p>
+    <ul>
+        <li><code>-l</code> o <code>-L</code>: Especifica un nombre de usuario único (-l) o una lista de usuarios (-L).</li>
+        <li><code>-p</code> o <code>-P</code>: Especifica una contraseña única (-p) o una lista de contraseñas (-P).</li>
+        <li><code>-t</code>: Define el número de tareas paralelas (usualmente se usa para acelerar el proceso).</li>
+        <li><code>-s</code>: Especifica el puerto a atacar si es diferente al puerto estándar.</li>
+    </ul>
+
+    <p>Ejemplo básico:</p>
+    <pre><code>hydra -l admin -P /path/to/passwords.txt ftp://192.168.1.10</code></pre>
+    <p>En este ejemplo, Hydra intentará acceder al servicio FTP en la dirección <code>192.168.1.10</code> usando el nombre de usuario <code>admin</code> y todas las contraseñas del archivo <code>passwords.txt</code>.</p>
+    
+    <h2>Introducción a SQLMap</h2>
+    <p>SQLMap es una herramienta que automatiza la detección y explotación de vulnerabilidades de inyección SQL en aplicaciones web. Es una herramienta crucial para realizar pruebas de penetración y evaluaciones de seguridad.</p>
+
+    <h3>Comandos Básicos de SQLMap</h3>
+    <p>SQLMap tiene una estructura básica de comandos como la siguiente:</p>
+    <pre><code>sqlmap -u [url_del_objetivo] [opciones]</code></pre>
+
+    <p>Algunos comandos y opciones importantes:</p>
+    <ul>
+        <li><code>-u</code>: Especifica la URL del objetivo que se va a escanear.</li>
+        <li><code>--dbs</code>: Muestra las bases de datos disponibles en el objetivo.</li>
+        <li><code>--tables</code>: Muestra las tablas de una base de datos seleccionada.</li>
+        <li><code>--dump</code>: Extrae los datos de una tabla específica.</li>
+    </ul>
+
+    <p>Ejemplo básico:</p>
+    <pre><code>sqlmap -u "http://example.com/vulnerable.php?id=1" --dbs</code></pre>
+    <p>Este comando examina la URL proporcionada para ver si es vulnerable a inyección SQL y, si lo es, enumera las bases de datos disponibles.</p>
+    
+    <h3>Situaciones de Uso de SQLMap</h3>
+    <p>SQLMap se utiliza cuando se sospecha que una aplicación web puede ser vulnerable a inyección SQL, lo que podría permitir que un atacante acceda o manipule bases de datos. Es especialmente útil en pruebas de penetración para identificar y explotar estas vulnerabilidades de manera controlada.</p>
+
+    <div class="exam">
+        <h2>Examen de Conocimientos en Hacking Ético</h2>
+        <form id="examForm">
+            <div class="question">
+                <p>1. ¿Cuál es el propósito principal de Hydra en pruebas de seguridad?</p>
+                <label><input type="radio" name="q1" value="a"> A. Probar la integridad de bases de datos</label><br>
+                <label><input type="radio" name="q1" value="b"> B. Realizar ataques de fuerza bruta contra servicios de autenticación</label><br>
+                <label><input type="radio" name="q1" value="c"> C. Analizar el tráfico de red</label><br>
+            </div>
+            <div class="question">
+                <p>2. ¿Qué comando de SQLMap mostraría las bases de datos disponibles en un objetivo?</p>
+                <label><input type="radio" name="q2" value="a"> A. --dbs</label><br>
+                <label><input type="radio" name="q2" value="b"> B. --tables</label><br>
+                <label><input type="radio" name="q2" value="c"> C. --dump</label><br>
+            </div>
+            <div class="question">
+                <p>3. ¿En qué situación usarías SQLMap?</p>
+                <label><input type="radio" name="q3" value="a"> A. Cuando sospechas de una vulnerabilidad de inyección SQL en una aplicación web</label><br>
+                <label><input type="radio" name="q3" value="b"> B. Para interceptar comunicaciones HTTPS</label><br>
+                <label><input type="radio" name="q3" value="c"> C. Para realizar un escaneo de puertos en una red</label><br>
+            </div>
+            <button type="button" onclick="submitExam()">Enviar Examen</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function submitExam() {
+            const answers = {
+                q1: "b",
+                q2: "a",
+                q3: "a"
+            };
+            let score = 0;
+            const form = document.getElementById('examForm');
+            for (let i = 1; i <= 3; i++) {
+                const question = form.querySelector(`input[name="q${i}"]:checked`);
+                if (question && question.value === answers[`q${i}`]) {
+                    score++;
+                }
+            }
+            const resultText = `Tu puntuación es: ${score} de 3.`;
+            document.getElementById('result').textContent = resultText;
+        }
+    </script>
+
+</body>
+</html>
